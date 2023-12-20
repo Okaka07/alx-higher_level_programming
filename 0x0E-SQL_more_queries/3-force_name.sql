@@ -1,3 +1,3 @@
--- creates the table force_name on your MySQL server
--- creates a table in a database
-CREATE TABLE IF NOT EXISTS force_name (id INT, name VARCHAR(256) NOT NULL);
+#!/usr/bin/sql
+-- creates a new table with Null constraints
+CREATE TABLE IF NOT EXISTS force_name(id INT, name VARCHAR(256) NOT NULL );
