@@ -1,57 +1,37 @@
 #!/usr/bin/python3
-"""
-This program define a Student in a class
-"""
+"""Defines a class Student."""
 
 
-class Student():
-    """
-    Class of a student
-    """
+class Student:
+    """Represent a student."""
 
     def __init__(self, first_name, last_name, age):
-        """
-        Constructor of a student
+        """Initialize a new Student.
         Args:
-          - first_name: str
-          - last_name: str
-          - age: int
+            first_name (str): The first name of the student.
+            last_name (str): The last name of the student.
+            age (int): The age of the student.
         """
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self, attrs=None):
-        """
-        Return the dict representation of the instance
+        """Get a dictionary representation of the Student.
+        If attrs is a list of strings, represents only those attributes
+        included in the list.
         Args:
-          - attrs: list (None default)
+            attrs (list): (Optional) The attributes to represent.
         """
-
-        result = {}
-
-        if attrs is None:
-            return (self.__dict__)
-
-        for attr in attrs:
-            value = self.__dict__.get(attr)
-            if value is not None:
-                result[attr] = value
-
-        return (result)
+        if (type(attrs) == list and
+                all(type(ele) == str for ele in attrs)):
+            return {k: getattr(self, k) for k in attrs if hasattr(self, k)}
+        return self.__dict__
 
     def reload_from_json(self, json):
-        """
-        Update all public instance attributes
+        """Replace all attributes of the Student.
         Args:
-          - json: dict
+            json (dict): The key/value pairs to replace attributes with.
         """
-        dict_des = self.__dict__
-
-        for key, value in json.items():
-            if (dict_des.get(key) == self.first_name):
-                self.first_name = value
-            elif (dict_des.get(key) == self.last_name):
-                self.last_name = value
-            elif (dict_des.get(key) == self.age):
-                self.age = value
+        for k, v in json.items():
+            setattr(self, k, v)

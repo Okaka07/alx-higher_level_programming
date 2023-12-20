@@ -1,11 +1,8 @@
 #!/usr/bin/python3
-"""The module performs magic"""
-
-
+"""Defines a string-to-JSON function."""
 import json
 
 
 def to_json_string(my_obj):
-    """Returns wahala"""
-    new = json.dumps(my_obj)
-    return (new)
+    """Return the JSON representation of a string object."""
+    return json.dumps(my_obj)
